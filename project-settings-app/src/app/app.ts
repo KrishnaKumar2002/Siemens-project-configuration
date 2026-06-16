@@ -1,6 +1,20 @@
 import { Component, inject, signal, computed } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+// Custom validator for comma-separated list of valid email addresses
+export function multiEmailValidator(): ValidatorFn {
+  const emailRegex = /^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    if (!value) {
+      return null;
+    }
+    const emails = value.split(',');
+    const allValid = emails.every((email: string) => emailRegex.test(email.trim()));
+    return allValid ? null : { multiEmail: true };
+  };
+}
 import { RouterOutlet } from '@angular/router';
 import {
   SiApplicationHeaderComponent,
@@ -66,7 +80,7 @@ export class App {
     responsibleEmail: ['', [Validators.required, Validators.email]],
     deploymentLocation: ['', [Validators.required]],
     reconfigureConnectivity: ['No', [Validators.required]],
-    alertEmails: ['', [Validators.pattern(/^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(,([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}))*$/)]]
+    alertEmails: ['', [multiEmailValidator()]]
   });
 
   // Holds the formatted JSON result for UI display
@@ -89,7 +103,7 @@ export class App {
     if (control.errors['email']) {
       return 'Please enter a valid email address.';
     }
-    if (control.errors['pattern']) {
+    if (control.errors['multiEmail']) {
       return 'Please enter a comma-separated list of valid email addresses without spaces (e.g., email1@siemens.com,email2@siemens.com).';
     }
     return 'Invalid field value.';

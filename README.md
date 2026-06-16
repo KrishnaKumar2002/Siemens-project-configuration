@@ -53,7 +53,7 @@ A professional, single-page web application for configuring project settings. Th
 │   │   │   ├── app.ts             # Form validation, Signals state, theme toggle
 │   │   │   ├── app.html           # Siemens element template layout
 │   │   │   ├── app.scss           # Component styling
-│   │   │   ├── app.spec.ts        # Human-like unit tests with browser mocks
+│   │   │   ├── app.spec.ts        # Unit tests with browser mocks
 │   │   │   └── app.routes.server.ts # Route server configurations
 │   │   ├── index.html             # HTML layout initialized with theme assets
 │   │   └── styles.scss            # Global SCSS overrides and logo filters
@@ -126,6 +126,7 @@ This approach simplifies configurations and automatically injects local environm
    ```
 2. **Run the container** (injecting variables or passing an `.env` file):
    ```bash
+   <!-- podman run -d -p 4000:4000 --env-file .env --name siemens-app siemens-configurator -->
    podman run -d -p 4000:4000 --env-file .env --name siemens-app siemens-configurator
    ```
 

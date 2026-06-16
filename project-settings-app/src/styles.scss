@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@siemens/element-icons/style/siemens-element-icons.css';
+@import '@siemens/element-theme/src/theme.scss';
+@import '@siemens/element-ng/element-ng.scss';
+
+:root {
+  --element-brand-logo: url("https://upload.wikimedia.org/wikipedia/commons/5/5f/Siemens-logo.svg");
+  --element-brand-logo-width: 100px;
+  --element-brand-logo-height: 20px;
+  --element-brand-logo-text: "Siemens";
+}
+
+.app--dark, :root.app--dark {
+  --element-brand-logo: url("https://new.siemens.com/etc.clientlibs/siemens-sites/components/content/header/clientlibs/resources/logo/siemens-logo-default.svg");
+}
+

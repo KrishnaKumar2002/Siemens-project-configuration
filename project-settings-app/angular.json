@@ -33,10 +33,21 @@
             "styles": [
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            },
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
-              "allowedHosts": []
+              "allowedHosts": [
+                "localhost",
+                "localhost:4000",
+                "127.0.0.1",
+                "127.0.0.1:4000",
+                "0.0.0.0"
+              ]
             },
             "ssr": {
               "entry": "src/server.ts"

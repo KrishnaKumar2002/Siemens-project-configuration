@@ -4,13 +4,13 @@
 @import '@siemens/element-ng/element-ng.scss';
 
 :root, :root.theme-element {
-  --element-brand-logo: url("https://images.weserv.nl/?url=https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/siemens.svg&fill=009999");
+  --element-brand-logo: url("https://upload.wikimedia.org/wikipedia/commons/5/5f/Siemens-logo.svg");
   --element-brand-logo-width: 100px;
   --element-brand-logo-height: 20px;
   --element-brand-logo-text: "Siemens";
 }
 
-:root.app--dark, :root.theme-element.app--dark {
-  --element-brand-logo: url("https://images.weserv.nl/?url=https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/siemens.svg&fill=ffffff");
+:root.app--dark .header-logo, :root.theme-element.app--dark .header-logo {
+  filter: brightness(0) invert(1);
 }
 

@@ -7,11 +7,11 @@
   <si-header-actions>
     <button
       si-header-action-item
-      [icon]="isDarkMode ? icons.elementSun : icons.elementSunFilled"
+      [icon]="themeIcon()"
       (click)="toggleTheme()"
-      [attr.aria-label]="isDarkMode ? 'Switch to light theme' : 'Switch to dark theme'"
+      [attr.aria-label]="isDarkMode() ? 'Switch to light theme' : 'Switch to dark theme'"
     >
-      {{ isDarkMode ? 'Light' : 'Dark' }}
+      {{ themeText() }}
     </button>
   </si-header-actions>
 </si-application-header>
@@ -146,11 +146,11 @@
   </form>
 
   <!-- Output Result JSON Area -->
-  @if (submittedJson) {
+  @if (submittedJson()) {
     <div class="mt-4">
       <si-card heading="Result Payload (JSON)" class="mb-5 d-block" style="border-top: 3px solid #002b49;">
         <div body class="p-3 bg-light border rounded">
-          <pre class="m-0 text-dark small" style="white-space: pre-wrap; font-family: 'Courier New', Courier, monospace; line-height: 1.5;">{{ submittedJson }}</pre>
+          <pre class="m-0 text-dark small" style="white-space: pre-wrap; font-family: 'Courier New', Courier, monospace; line-height: 1.5;">{{ submittedJson() }}</pre>
         </div>
       </si-card>
     </div>

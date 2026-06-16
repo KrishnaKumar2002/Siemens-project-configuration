@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
@@ -39,11 +39,13 @@ export class App {
   private readonly fb = inject(FormBuilder);
   private readonly themeService = inject(SiThemeService);
 
-  isDarkMode = false;
+  isDarkMode = signal(false);
+  themeIcon = computed(() => this.isDarkMode() ? this.icons.elementSun : this.icons.elementSunFilled);
+  themeText = computed(() => this.isDarkMode() ? 'Light' : 'Dark');
 
   toggleTheme(): void {
-    this.isDarkMode = !this.isDarkMode;
-    const mode = this.isDarkMode ? 'dark' : 'light';
+    this.isDarkMode.update(prev => !prev);
+    const mode = this.isDarkMode() ? 'dark' : 'light';
     this.themeService.applyThemeType(mode);
     
     // Also sync the HTML attribute for bootstrap styling compatibility
@@ -68,7 +70,7 @@ export class App {
   });
 
   // Holds the formatted JSON result for UI display
-  submittedJson: string | null = null;
+  submittedJson = signal<string | null>(null);
 
   // Helper getters to check validation states for fields
   isInvalid(controlName: string): boolean {
@@ -96,12 +98,12 @@ export class App {
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.submittedJson = null;
+      this.submittedJson.set(null);
       return;
     }
 
     const payload = JSON.stringify(this.form.value, null, 2);
-    this.submittedJson = payload;
+    this.submittedJson.set(payload);
     // Output form data to console in JSON format as required
     console.log(payload);
   }

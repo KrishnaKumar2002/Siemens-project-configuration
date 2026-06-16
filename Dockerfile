@@ -3,8 +3,8 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Copy dependency manifests
-COPY project-settings-app/package*.json ./
+# Copy dependency manifests and config
+COPY project-settings-app/package*.json project-settings-app/.npmrc ./
 
 # Install dependencies (leverage lockfile for reproducible builds)
 RUN npm ci

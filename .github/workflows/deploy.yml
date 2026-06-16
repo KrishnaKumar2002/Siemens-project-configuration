@@ -1,0 +1,49 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: |
+          cd project-settings-app
+          npm ci
+
+      - name: Build Application
+        run: |
+          cd project-settings-app
+          npx ng build --base-href /Siemens-project-configuration/
+          # Copy CSR index to index.html for static GitHub Pages hosting
+          cp dist/project-settings-app/browser/index.csr.html dist/project-settings-app/browser/index.html
+          # Prevent Jekyll processing to ensure routing and assets resolve correctly
+          touch dist/project-settings-app/browser/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: project-settings-app/dist/project-settings-app/browser
+          branch: gh-pages

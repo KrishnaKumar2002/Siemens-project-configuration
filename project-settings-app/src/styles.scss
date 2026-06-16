@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@siemens/element-theme/src/theme.scss';
+@use '@siemens/element-ng/element-ng.scss';
 @import '@siemens/element-icons/style/siemens-element-icons.css';
-@import '@siemens/element-theme/src/theme.scss';
-@import '@siemens/element-ng/element-ng.scss';
 
 :root, :root.theme-element {
   --element-brand-logo: url("https://upload.wikimedia.org/wikipedia/commons/5/5f/Siemens-logo.svg");

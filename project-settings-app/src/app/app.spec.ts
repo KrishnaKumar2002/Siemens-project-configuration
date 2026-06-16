@@ -72,4 +72,60 @@ describe('App', () => {
     emailControl?.setValue('test@siemens.com');
     expect(emailControl?.valid).toBeTruthy();
   });
+
+  it('should display validation error message to the user when email format is invalid', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const emailInput = compiled.querySelector('input[formControlName="responsibleEmail"]') as HTMLInputElement;
+
+    // Simulate user typing invalid email
+    emailInput.value = 'bad-email';
+    emailInput.dispatchEvent(new Event('input'));
+    emailInput.dispatchEvent(new Event('blur')); // trigger touch
+    fixture.detectChanges();
+
+    // Verify validation error message is shown in the DOM
+    const feedback = compiled.querySelector('input[formControlName="responsibleEmail"] ~ .invalid-feedback');
+    expect(feedback).toBeTruthy();
+    expect(feedback?.textContent).toContain('Invalid email address');
+  });
+
+  it('should render the JSON payload on the screen when a human successfully submits the form', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // Fill in the form values
+    const clientInput = compiled.querySelector('input[formControlName="clientName"]') as HTMLInputElement;
+    clientInput.value = 'Siemens AG';
+    clientInput.dispatchEvent(new Event('input'));
+
+    const projectInput = compiled.querySelector('input[formControlName="projectName"]') as HTMLInputElement;
+    projectInput.value = 'Configurator WebApp';
+    projectInput.dispatchEvent(new Event('input'));
+
+    const emailInput = compiled.querySelector('input[formControlName="responsibleEmail"]') as HTMLInputElement;
+    emailInput.value = 'commissioner@siemens.com';
+    emailInput.dispatchEvent(new Event('input'));
+
+    // Select options via Form Control
+    const app = fixture.componentInstance;
+    app.form.get('deploymentLocation')?.setValue('crsp-emea');
+    app.form.get('reconfigureConnectivity')?.setValue('No');
+    fixture.detectChanges();
+
+    // Click submit button
+    const submitButton = compiled.querySelector('button[type="submit"]') as HTMLButtonElement;
+    submitButton.click();
+    fixture.detectChanges();
+
+    // Verify payload is printed in the <pre> block on the screen
+    const preElement = compiled.querySelector('pre');
+    expect(preElement).toBeTruthy();
+    expect(preElement?.textContent).toContain('"clientName": "Siemens AG"');
+    expect(preElement?.textContent).toContain('"projectName": "Configurator WebApp"');
+    expect(preElement?.textContent).toContain('"responsibleEmail": "commissioner@siemens.com"');
+    expect(preElement?.textContent).toContain('"deploymentLocation": "crsp-emea"');
+  });
 });

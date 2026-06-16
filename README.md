@@ -142,6 +142,24 @@ This approach simplifies configurations and automatically injects local environm
 
 Access the running containerized application at **`http://localhost:4000`**.
 
+### Option D: Using Kubernetes
+For orchestrating at scale, deploy the resources inside your cluster using the provided manifests:
+
+1. **Apply ConfigMap, Deployment, and Service**:
+   ```bash
+   kubectl apply -f k8s/deployment.yml
+   ```
+2. **Verify Pods & Services Status**:
+   ```bash
+   kubectl get pods -l app=siemens-configurator
+   kubectl get service siemens-configurator-service
+   ```
+3. **Port Forward** (for local verification without an Ingress):
+   ```bash
+   kubectl port-forward service/siemens-configurator-service 8080:80
+   ```
+   Access the app locally at `http://localhost:8080`.
+
 ---
 
 ## 💡 Key Design & Engineering Decisions

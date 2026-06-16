@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  configurator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: siemens-configurator:latest
+    container_name: siemens-configurator-app
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+
+# docker compose up -d --build
+# docker compose down

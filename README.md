@@ -143,22 +143,61 @@ This approach simplifies configurations and automatically injects local environm
 Access the running containerized application at **`http://localhost:4000`**.
 
 ### Option D: Using Kubernetes
-For orchestrating at scale, deploy the resources inside your cluster using the provided manifests:
+For orchestrating at scale, deploy and test the resources inside your cluster:
 
-1. **Apply ConfigMap, Deployment, and Service**:
+1. **Enable Local Kubernetes**:
+   - **Docker Desktop**: Go to *Settings -> Kubernetes* and check **Enable Kubernetes**.
+   - **Minikube**: Start your cluster with `minikube start`.
+
+2. **Make the Docker Image Available**:
+   - **Docker Desktop**: Standard builds are automatically shared. Build the image:
+     ```bash
+     docker build -t siemens-configurator:latest .
+     ```
+   - **Minikube**: Point terminal environment to minikube registry and build:
+     ```bash
+     eval $(minikube docker-env)
+     docker build -t siemens-configurator:latest .
+     ```
+
+3. **Apply ConfigMap, Deployment, and Service Manifests**:
    ```bash
    kubectl apply -f k8s/deployment.yml
    ```
-2. **Verify Pods & Services Status**:
+
+4. **Verify Pods & Services Status**:
    ```bash
+   # Wait until STATUS changes to 'Running'
    kubectl get pods -l app=siemens-configurator
    kubectl get service siemens-configurator-service
    ```
-3. **Port Forward** (for local verification without an Ingress):
-   ```bash
-   kubectl port-forward service/siemens-configurator-service 8080:80
-   ```
-   Access the app locally at `http://localhost:8080`.
+
+5. **Access the Application**:
+   - **Port Forwarding (Docker Desktop / Generic)**:
+     ```bash
+     kubectl port-forward service/siemens-configurator-service 8080:80
+     ```
+     Access the app at **`http://localhost:8080`**.
+   - **Minikube Service Command**:
+     ```bash
+     minikube service siemens-configurator-service
+     ```
+
+#### 📝 Explanation of Kubernetes Commands
+* **`kubectl apply -f k8s/deployment.yml`**: Submits the manifests to the Kubernetes API server to configure resources (`ConfigMap`, `Deployment`, `Service`) declaratively.
+* **`kubectl get pods -l app=siemens-configurator`**: Returns runtime states of pods carrying the label matching your application selector.
+* **`kubectl get service siemens-configurator-service`**: Displays the active internal IP address and mapped target ports.
+* **`kubectl port-forward service/siemens-configurator-service 8080:80`**: Opens a local network tunnel from your Mac's port `8080` directly to port `80` of the ClusterIP service.
+* **`minikube service siemens-configurator-service`**: Minikube utility command that automatically handles proxy routes and launches the app in your system's browser.
+
+#### ⚠️ Troubleshooting: OpenAPI Connection/Validation Errors
+If you see connection reset errors while validating/deploying, your local cluster context is down or initializing:
+* **Skip Client Validation**: Deploy directly by bypassing client validation checking:
+  ```bash
+  kubectl apply -f k8s/deployment.yml --validate=false
+  ```
+* **Verify Cluster Status**: Run `kubectl cluster-info` to check if your cluster control plane is responding.
+* **Restart Local Cluster**: Restart Docker Desktop or Minikube, and wait 1–2 minutes for the Kubernetes API server to start up fully before trying again.
 
 ---
 

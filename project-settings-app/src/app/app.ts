@@ -59,8 +59,8 @@ export class App {
     }
   }
 
-  // Form group definition matching requirements and wireframe structure
-  readonly form: FormGroup = this.fb.group({
+  // Form group definition matching requirements and wireframe structure (strongly typed)
+  readonly form = this.fb.nonNullable.group({
     clientName: ['', [Validators.required]],
     projectName: ['', [Validators.required]],
     responsibleEmail: ['', [Validators.required, Validators.email]],

@@ -4,13 +4,13 @@
 @import '@siemens/element-ng/element-ng.scss';
 
 :root, :root.theme-element {
-  --element-brand-logo: url("https://upload.wikimedia.org/wikipedia/commons/5/5f/Siemens-logo.svg");
+  --element-brand-logo: url("https://images.weserv.nl/?url=https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/siemens.svg&fill=009999");
   --element-brand-logo-width: 100px;
   --element-brand-logo-height: 20px;
   --element-brand-logo-text: "Siemens";
 }
 
 :root.app--dark, :root.theme-element.app--dark {
-  --element-brand-logo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 32'%3E%3Cpath d='M7.6 19.3c.7.4 1.6.6 2.5.6.8 0 1.2-.2 1.2-.6 0-.3-.3-.5-1-.7-1.7-.5-3.3-1.1-3.3-2.9 0-1.8 1.5-3.1 3.8-3.1 1 0 2 .2 2.7.6l-.6 1.8c-.6-.3-1.4-.5-2.1-.5-.8 0-1.1.2-1.1.5 0 .3.3.4.9.6 1.8.5 3.3 1 3.3 2.9 0 2-1.6 3.1-4 3.1-1.1 0-2.3-.3-3.1-.8l.9-1.9zm8.5-5.9h2.5v10.1h-2.5V13.4zm0-3.3h2.5V12.6h-2.5v-2.5zm7.3 6.9c.1-1.9 1.4-3.8 3.5-3.8 2.2 0 3.3 1.7 3.3 3.6v.5h-6.8c0 1.3.8 2.2 2.3 2.2.9 0 1.8-.3 2.5-.7l.6 1.6c-.9.6-2.2.9-3.3.9-3.2-.1-4.7-2-4.7-4.3zm4.3-1.7c-.8 0-1.6.5-1.7 1.3h3.5v-.2c0-.7-.6-1.1-1.8-1.1zm8.3-1.9h2.3v1.3h.1c.5-.9 1.5-1.6 2.7-1.6 1.4 0 2.2.7 2.6 1.7.6-1.1 1.7-1.7 3-1.7 2 0 3 1.2 3 3.2v7.2h-2.5v-6.7c0-1-.3-1.7-1.2-1.7-.8 0-1.3.6-1.3 1.5v6.9H44v-6.7c0-1-.3-1.7-1.2-1.7-.8 0-1.3.6-1.3 1.5v6.9h-2.5V13.4zm18.3 5.9c.1-1.9 1.4-3.8 3.5-3.8 2.2 0 3.3 1.7 3.3 3.6v.5h-6.8c0 1.3.8 2.2 2.3 2.2.9 0 1.8-.3 2.5-.7l.6 1.6c-.9.6-2.2.9-3.3.9-3.2-.1-4.7-2-4.7-4.3zm4.3-1.7c-.8 0-1.6.5-1.7 1.3h3.5v-.2c0-.7-.6-1.1-1.8-1.1zm8.3-1.9h2.3v1.4h.1c.6-.9 1.7-1.7 3.1-1.7 2.1 0 3.3 1.3 3.3 3.4v7h-2.5v-6.6c0-1.1-.5-1.7-1.4-1.7-.9 0-1.5.7-1.5 1.7v6.6H58V13.4zm16 5.9c.7.4 1.6.6 2.5.6.8 0 1.2-.2 1.2-.6 0-.3-.3-.5-1-.7-1.7-.5-3.3-1.1-3.3-2.9 0-1.8 1.5-3.1 3.8-3.1 1 0 2 .2 2.7.6l-.6 1.8c-.6-.3-1.4-.5-2.1-.5-.8 0-1.1.2-1.1.5 0 .3.3.4.9.6 1.8.5 3.3 1 3.3 2.9 0 2-1.6 3.1-4 3.1-1.1 0-2.3-.3-3.1-.8l.9-1.9z' fill='%23ffffff'/%3E%3C/svg%3E");
+  --element-brand-logo: url("https://images.weserv.nl/?url=https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/siemens.svg&fill=ffffff");
 }
 

@@ -17,9 +17,9 @@ A professional, single-page web application for configuring project settings. Th
   - **Project Information**: Client Name (required), Project Name (required), and Main Commissioner Email (required, format-validated).
   - **Connectivity**: Deployment Location (dropdown selector with crsp locations) and Re-configure Connectivity option.
   - **Alerts**: Custom reusable multi-email validation function (`multiEmailValidator`) validating comma-separated email lists without spaces.
-- **Instant JSON Feedback**:
-  - Live on-screen rendering of the submitted configuration JSON payload.
-  - Logs the formatted JSON configuration payload directly to the console on submission.
+- **Side-by-Side Dashboard Layout**:
+  - The configurator settings form is aligned on the left side, and the live validated JSON configuration payload dynamically renders on the right side.
+  - Displays a clean "Awaiting Submission" placeholder empty-state card with system cues when no configuration is active.
 - **Robust Theming**:
   - Full integration with Siemens' `SiThemeService`.
   - CSS custom variables overrides ensuring high contrast petrol/white brand logos depending on the active theme (light/dark).

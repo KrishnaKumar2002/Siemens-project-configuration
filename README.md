@@ -162,7 +162,7 @@ For orchestrating at scale, deploy and test the resources inside your cluster:
 
 3. **Apply ConfigMap, Deployment, and Service Manifests**:
    ```bash
-   kubectl apply -f k8s/deployment.yml
+   kubectl apply -f k8s/
    ```
 
 4. **Verify Pods & Services Status**:
@@ -184,7 +184,7 @@ For orchestrating at scale, deploy and test the resources inside your cluster:
      ```
 
 #### 📝 Explanation of Kubernetes Commands
-* **`kubectl apply -f k8s/deployment.yml`**: Submits the manifests to the Kubernetes API server to configure resources (`ConfigMap`, `Deployment`, `Service`) declaratively.
+* **`kubectl apply -f k8s/`**: Submits all manifest files in the `k8s/` directory to the Kubernetes API server to configure resources (`ConfigMap`, `Deployment`, `Service`) declaratively at once.
 * **`kubectl get pods -l app=siemens-configurator`**: Returns runtime states of pods carrying the label matching your application selector.
 * **`kubectl get service siemens-configurator-service`**: Displays the active internal IP address and mapped target ports.
 * **`kubectl port-forward service/siemens-configurator-service 8080:80`**: Opens a local network tunnel from your Mac's port `8080` directly to port `80` of the ClusterIP service.
@@ -194,7 +194,7 @@ For orchestrating at scale, deploy and test the resources inside your cluster:
 If you see connection reset errors while validating/deploying, your local cluster context is down or initializing:
 * **Skip Client Validation**: Deploy directly by bypassing client validation checking:
   ```bash
-  kubectl apply -f k8s/deployment.yml --validate=false
+  kubectl apply -f k8s/ --validate=false
   ```
 * **Verify Cluster Status**: Run `kubectl cluster-info` to check if your cluster control plane is responding.
 * **Restart Local Cluster**: Restart Docker Desktop or Minikube, and wait 1–2 minutes for the Kubernetes API server to start up fully before trying again.

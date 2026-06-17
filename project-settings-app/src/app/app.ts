@@ -53,6 +53,7 @@ export class App {
   private readonly fb = inject(FormBuilder);
   private readonly themeService = inject(SiThemeService);
 
+  // Signal to track current theme mode (light/dark)
   isDarkMode = signal(false);
   themeIcon = computed(() => this.isDarkMode() ? this.icons.elementSun : this.icons.elementSunFilled);
   themeText = computed(() => this.isDarkMode() ? 'Light' : 'Dark');

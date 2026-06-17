@@ -16,7 +16,7 @@
   </si-header-actions>
 </si-application-header>
 
-<div class="container" style="max-width: 800px; font-family: 'Siemens Sans', sans-serif; padding-top: 80px; padding-bottom: 48px;">
+<div class="container" style="max-width: 1200px; font-family: 'Siemens Sans', sans-serif; padding-top: 80px; padding-bottom: 48px;">
   
   <div class="row mb-4">
     <div class="col">
@@ -25,136 +25,149 @@
     </div>
   </div>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    
-    <!-- Section 1: Project Information -->
-    <si-card heading="Project information" class="mb-4 d-block" style="border-top: 3px solid #009999;">
-      <div body class="p-3">
+  <div class="row">
+    <!-- Left Side: Configurator Form -->
+    <div class="col-lg-7 col-md-6 col-12">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         
-        <si-form-item label="Name of the client" [required]="true" class="mb-3 d-block">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="clientName"
-            placeholder="Enter client name"
-            [class.is-invalid]="isInvalid('clientName')"
-          />
-          @if (isInvalid('clientName')) {
-            <div class="invalid-feedback d-block">{{ getErrorMessage('clientName') }}</div>
-          }
-        </si-form-item>
+        <!-- Section 1: Project Information -->
+        <si-card heading="Project information" class="mb-4 d-block" style="border-top: 3px solid #009999;">
+          <div body class="p-3">
+            
+            <si-form-item label="Name of the client" [required]="true" class="mb-3 d-block">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="clientName"
+                placeholder="Enter client name"
+                [class.is-invalid]="isInvalid('clientName')"
+              />
+              @if (isInvalid('clientName')) {
+                <div class="invalid-feedback d-block">{{ getErrorMessage('clientName') }}</div>
+              }
+            </si-form-item>
 
-        <si-form-item label="Name of the project" [required]="true" class="mb-3 d-block">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="projectName"
-            placeholder="Enter project name"
-            [class.is-invalid]="isInvalid('projectName')"
-          />
-          @if (isInvalid('projectName')) {
-            <div class="invalid-feedback d-block">{{ getErrorMessage('projectName') }}</div>
-          }
-        </si-form-item>
+            <si-form-item label="Name of the project" [required]="true" class="mb-3 d-block">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="projectName"
+                placeholder="Enter project name"
+                [class.is-invalid]="isInvalid('projectName')"
+              />
+              @if (isInvalid('projectName')) {
+                <div class="invalid-feedback d-block">{{ getErrorMessage('projectName') }}</div>
+              }
+            </si-form-item>
 
-        <si-form-item label="Email of main responsible commissioner" [required]="true" class="mb-3 d-block">
-          <input
-            type="email"
-            class="form-control"
-            formControlName="responsibleEmail"
-            placeholder="responsible@siemens.com"
-            [class.is-invalid]="isInvalid('responsibleEmail')"
-          />
-          @if (isInvalid('responsibleEmail')) {
-            <div class="invalid-feedback d-block">{{ getErrorMessage('responsibleEmail') }}</div>
-          }
-        </si-form-item>
+            <si-form-item label="Email of main responsible commissioner" [required]="true" class="mb-3 d-block">
+              <input
+                type="email"
+                class="form-control"
+                formControlName="responsibleEmail"
+                placeholder="responsible@siemens.com"
+                [class.is-invalid]="isInvalid('responsibleEmail')"
+              />
+              @if (isInvalid('responsibleEmail')) {
+                <div class="invalid-feedback d-block">{{ getErrorMessage('responsibleEmail') }}</div>
+              }
+            </si-form-item>
 
-      </div>
-    </si-card>
+          </div>
+        </si-card>
 
-    <!-- Section 2: Connectivity Settings -->
-    <si-card heading="Connectivity settings" class="mb-4 d-block" style="border-top: 3px solid #009999;">
-      <div body class="p-3">
-        
-        <si-form-item label="Deployment location" [required]="true" class="mb-3 d-block">
-          <si-select
-            formControlName="deploymentLocation"
-            placeholder="Select a deployment location…"
-            [options]="[
-              { type: 'option', value: 'crsp-emea', label: 'crsp-emea (production)' },
-              { type: 'option', value: 'crsp-na', label: 'crsp-na (production)' },
-              { type: 'option', value: 'crsp-apac', label: 'crsp-apac (production)' },
-              { type: 'option', value: 'crsp-release', label: 'crsp-release (testing)' },
-              { type: 'option', value: 'local', label: 'local (development)' }
-            ]"
-            [class.is-invalid]="isInvalid('deploymentLocation')"
-          >
-          </si-select>
-          @if (isInvalid('deploymentLocation')) {
-            <div class="invalid-feedback d-block">{{ getErrorMessage('deploymentLocation') }}</div>
-          }
-        </si-form-item>
+        <!-- Section 2: Connectivity Settings -->
+        <si-card heading="Connectivity settings" class="mb-4 d-block" style="border-top: 3px solid #009999;">
+          <div body class="p-3">
+            
+            <si-form-item label="Deployment location" [required]="true" class="mb-3 d-block">
+              <si-select
+                formControlName="deploymentLocation"
+                placeholder="Select a deployment location…"
+                [options]="[
+                  { type: 'option', value: 'crsp-emea', label: 'crsp-emea (production)' },
+                  { type: 'option', value: 'crsp-na', label: 'crsp-na (production)' },
+                  { type: 'option', value: 'crsp-apac', label: 'crsp-apac (production)' },
+                  { type: 'option', value: 'crsp-release', label: 'crsp-release (testing)' },
+                  { type: 'option', value: 'local', label: 'local (development)' }
+                ]"
+                [class.is-invalid]="isInvalid('deploymentLocation')"
+              >
+              </si-select>
+              @if (isInvalid('deploymentLocation')) {
+                <div class="invalid-feedback d-block">{{ getErrorMessage('deploymentLocation') }}</div>
+              }
+            </si-form-item>
 
-        <si-form-item label="Re-configure connectivity details?" [required]="true" class="mb-3 d-block">
-          <si-select
-            formControlName="reconfigureConnectivity"
-            [options]="[
-              { type: 'option', value: 'No', label: 'No (standard deployment)' },
-              { type: 'option', value: 'Yes', label: 'Yes (advanced users only)' }
-            ]"
-            [class.is-invalid]="isInvalid('reconfigureConnectivity')"
-          >
-          </si-select>
-          @if (isInvalid('reconfigureConnectivity')) {
-            <div class="invalid-feedback d-block">{{ getErrorMessage('reconfigureConnectivity') }}</div>
-          }
-        </si-form-item>
+            <si-form-item label="Re-configure connectivity details?" [required]="true" class="mb-3 d-block">
+              <si-select
+                formControlName="reconfigureConnectivity"
+                [options]="[
+                  { type: 'option', value: 'No', label: 'No (standard deployment)' },
+                  { type: 'option', value: 'Yes', label: 'Yes (advanced users only)' }
+                ]"
+                [class.is-invalid]="isInvalid('reconfigureConnectivity')"
+              >
+              </si-select>
+              @if (isInvalid('reconfigureConnectivity')) {
+                <div class="invalid-feedback d-block">{{ getErrorMessage('reconfigureConnectivity') }}</div>
+              }
+            </si-form-item>
 
-      </div>
-    </si-card>
+          </div>
+        </si-card>
 
-    <!-- Section 3: Email Alerting Settings -->
-    <si-card heading="Email alerting settings" class="mb-4 d-block" style="border-top: 3px solid #009999;">
-      <div body class="p-3">
-        
-        <si-form-item label="Alert recipient emails" class="mb-2 d-block">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="alertEmails"
-            placeholder="email1@siemens.com,email2@siemens.com"
-            [class.is-invalid]="isInvalid('alertEmails')"
-          />
-          @if (isInvalid('alertEmails')) {
-            <div class="invalid-feedback d-block">{{ getErrorMessage('alertEmails') }}</div>
-          } @else {
-            <div class="form-text text-muted mt-1 small">(comma-separated, no spaces; blank = no alerts)</div>
-          }
-        </si-form-item>
+        <!-- Section 3: Email Alerting Settings -->
+        <si-card heading="Email alerting settings" class="mb-4 d-block" style="border-top: 3px solid #009999;">
+          <div body class="p-3">
+            
+            <si-form-item label="Alert recipient emails" class="mb-2 d-block">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="alertEmails"
+                placeholder="email1@siemens.com,email2@siemens.com"
+                [class.is-invalid]="isInvalid('alertEmails')"
+              />
+              @if (isInvalid('alertEmails')) {
+                <div class="invalid-feedback d-block">{{ getErrorMessage('alertEmails') }}</div>
+              } @else {
+                <div class="form-text text-muted mt-1 small">(comma-separated, no spaces; blank = no alerts)</div>
+              }
+            </si-form-item>
 
-      </div>
-    </si-card>
+          </div>
+        </si-card>
 
-    <!-- Form Submit Action -->
-    <div class="d-flex justify-content-end mb-4">
-      <button type="submit" class="btn btn-primary" style="background-color: #009999; border-color: #009999; font-weight: 500; min-width: 120px;">
-        Submit
-      </button>
-    </div>
-
-  </form>
-
-  <!-- Output Result JSON Area -->
-  @if (submittedJson()) {
-    <div class="mt-4">
-      <si-card heading="Result Payload (JSON)" class="mb-5 d-block" style="border-top: 3px solid #002b49;">
-        <div body class="p-3 bg-light border rounded">
-          <pre class="m-0 text-dark small" style="white-space: pre-wrap; font-family: 'Courier New', Courier, monospace; line-height: 1.5;">{{ submittedJson() }}</pre>
+        <!-- Form Submit Action -->
+        <div class="d-flex justify-content-end mb-4">
+          <button type="submit" class="btn btn-primary" style="background-color: #009999; border-color: #009999; font-weight: 500; min-width: 120px;">
+            Submit
+          </button>
         </div>
-      </si-card>
+
+      </form>
     </div>
-  }
+
+    <!-- Right Side: Live JSON Output / Instructions -->
+    <div class="col-lg-5 col-md-6 col-12">
+      @if (submittedJson()) {
+        <si-card heading="Result Payload (JSON)" class="mb-4 d-block" style="border-top: 3px solid #002b49;">
+          <div body class="p-3 bg-light border rounded">
+            <pre class="m-0 text-dark small" style="white-space: pre-wrap; font-family: 'Courier New', Courier, monospace; line-height: 1.5;">{{ submittedJson() }}</pre>
+          </div>
+        </si-card>
+      } @else {
+        <si-card heading="Awaiting Submission" class="mb-4 d-block" style="border-top: 3px solid #6b7280; opacity: 0.85;">
+          <div body class="p-4 text-center text-muted">
+            <i class="element-icons element-info-outlined d-block mb-3" style="font-size: 2.5rem; color: #6b7280;"></i>
+            <p class="mb-1 fw-bold text-dark">No Configuration Active</p>
+            <p class="small mb-0">Fill in the configurator details on the left and submit to generate the validated JSON connectivity profile payload.</p>
+          </div>
+        </si-card>
+      }
+    </div>
+  </div>
 
 </div>
 
